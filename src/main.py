@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 import uvicorn
-
 from contextlib import asynccontextmanager
+
 from db import db_manager
 from models.base import Base
+
+from api import api_router
 
 
 @asynccontextmanager
@@ -14,6 +16,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(debug=True, lifespan=lifespan)
+app.include_router(api_router, prefix="/api")
 
 
 @app.get("/")

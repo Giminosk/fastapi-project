@@ -1,9 +1,19 @@
 from fastapi import FastAPI
-
 import uvicorn
 
+from contextlib import asynccontextmanager
+from db import db_manager
+from models.base import Base
 
-app = FastAPI(debug=False)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    async with db_manager.engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    yield
+
+
+app = FastAPI(debug=True, lifespan=lifespan)
 
 
 @app.get("/")

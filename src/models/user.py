@@ -7,8 +7,8 @@ from .base import Base
 
 from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from .profile import Profile
+# if TYPE_CHECKING:
+from .profile import Profile
 
 
 class User(Base):

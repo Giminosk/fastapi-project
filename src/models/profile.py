@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 
 class Profile(Base):
-    frirst_name: Mapped[str | None] = mapped_column(String(32))
+    first_name: Mapped[str | None] = mapped_column(String(32))
     last_name: Mapped[str | None] = mapped_column(String(32))
     bio: Mapped[str | None] = mapped_column(String(500))
     birthdate: Mapped[date | None] = mapped_column(Date)

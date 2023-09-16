@@ -1,17 +1,31 @@
-from pydantic import BaseModel, EmailStr
-from typing import Annotated
-from annotated_types import MinLen, MaxLen
+from pydantic import EmailStr
+from fastapi_users import schemas
+from datetime import datetime
 
 
-class UserSchema(BaseModel):
+class UserRead(schemas.BaseUser[int]):
+    id: int
     email: EmailStr
-    password: Annotated[str, MinLen(8), MaxLen(100)]
-    username: Annotated[str, MinLen(3), MaxLen(32)]
-    is_verified: bool
-    is_active: bool
+    username: str
+    created_at: datetime
+    is_active: bool = True
+    is_superuser: bool = False
+    is_verified: bool = False
 
 
-class UserCreateSchema(BaseModel):
+class UserCreate(schemas.BaseUserCreate):
     email: EmailStr
-    password: Annotated[str, MinLen(8), MaxLen(32)]
-    username: Annotated[str, MinLen(3), MaxLen(32)]
+    password: str
+    username: str | None = None
+    is_active: bool | None = True
+    is_superuser: bool | None = False
+    is_verified: bool | None = False
+
+
+class UserUpdate(schemas.BaseUserUpdate):
+    password: str | None = None
+    email: EmailStr | None = None
+    username: str | None = None
+    is_active: bool | None = None
+    is_superuser: bool | None = None
+    is_verified: bool | None = None

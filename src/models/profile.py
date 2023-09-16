@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 class Profile(Base):
     first_name: Mapped[str | None] = mapped_column(String(32))
     last_name: Mapped[str | None] = mapped_column(String(32))
-    bio: Mapped[str | None] = mapped_column(String(500))
+    bio: Mapped[str | None] = mapped_column(String(1000))
     birthdate: Mapped[date | None] = mapped_column(Date)
 
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))

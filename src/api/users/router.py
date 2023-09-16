@@ -1,23 +1,41 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import Depends, APIRouter
 
-# from sqlalchemy.ext.asyncio import AsyncSession
-#
-# from . import crud
-# from .schemas import UserSchema, UserCreateSchema
-# from src.db import db_manager
+from src.models.user import User
+from .schemas import UserCreate, UserRead, UserUpdate
+from .user_manager import auth_backend, current_active_user, fastapi_users
 
 
-router = APIRouter(tags=["users"])
+router = APIRouter()
+
+router.include_router(
+    fastapi_users.get_auth_router(auth_backend), prefix="/auth/jwt", tags=["auth"]
+)
+
+router.include_router(
+    fastapi_users.get_register_router(UserRead, UserCreate),
+    prefix="/auth",
+    tags=["auth"],
+)
+
+router.include_router(
+    fastapi_users.get_reset_password_router(),
+    prefix="/auth",
+    tags=["auth"],
+)
+
+router.include_router(
+    fastapi_users.get_verify_router(UserRead),
+    prefix="/auth",
+    tags=["auth"],
+)
+
+router.include_router(
+    fastapi_users.get_users_router(UserRead, UserUpdate),
+    prefix="/users",
+    tags=["users"],
+)
 
 
-# @router.get("/", response_model=list[UserSchema], summary="Get all users")
-# async def get_users(session: AsyncSession = Depends(db_manager.get_async_session)):
-#     return await crud.get_users(session=session)
-#
-#
-# @router.post("/", response_model=UserSchema, status_code=status.HTTP_201_CREATED)
-# async def create_user(
-#     user_in: UserCreateSchema,
-#     session: AsyncSession = Depends(db_manager.get_async_session),
-# ):
-#     return await crud.create_user(session=session, user_in=user_in)
+@router.get("/authenticated-route")
+async def authenticated_route(user: User = Depends(current_active_user)):
+    return {"message": f"Hello {user.email}!"}

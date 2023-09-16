@@ -24,6 +24,7 @@ class User(SQLAlchemyBaseUserTable[int], Base):
     )
 
     profile: Mapped[Profile] = relationship(back_populates="user")
+
     # posts
     # comments
     # cart

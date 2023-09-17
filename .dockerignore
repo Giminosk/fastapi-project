@@ -1,0 +1,39 @@
+# Ignore version control directories and files
+.git
+.gitignore
+
+# Ignore Python bytecode files
+__pycache__
+
+# Ignore local development settings and files
+*.log
+*.db
+*.sqlite3
+*.sqlite
+*.pyc
+*.pyo
+.venv
+
+# Ignore common build and package management files
+*.pyd
+*.cache
+*.swp
+*.egg-info
+*.egg
+.env.example
+
+# Ignore Docker-specific files
+Dockerfile
+.dockerignore
+
+# Ignore system-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE-specific directories
+.idea
+.vscode
+
+# Ignore any other temporary or generated files
+*.bak
+*.tmp

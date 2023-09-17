@@ -1,5 +1,3 @@
-# from typing import Optional
-
 from fastapi import Depends, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi_users import BaseUserManager, FastAPIUsers, IntegerIDMixin
@@ -10,9 +8,8 @@ from fastapi_users.authentication import (
 )
 from fastapi_users.db import SQLAlchemyUserDatabase
 
-# from .db import get_user_db
 from src.models.user import User
-from src.db import db_manager
+from src.db_manager import db_manager
 
 SECRET = "SECRET"
 

@@ -1,7 +1,7 @@
 from fastapi import Depends, APIRouter
 
 from src.models.user import User
-from .schemas import UserCreate, UserRead, UserUpdate
+from .schemas import UserCreateSchema, UserReadSchema, UserUpdateSchema
 from .user_manager import auth_backend, current_active_user, fastapi_users
 
 
@@ -12,7 +12,7 @@ router.include_router(
 )
 
 router.include_router(
-    fastapi_users.get_register_router(UserRead, UserCreate),
+    fastapi_users.get_register_router(UserReadSchema, UserCreateSchema),
     prefix="/auth",
     tags=["auth"],
 )
@@ -24,13 +24,13 @@ router.include_router(
 )
 
 router.include_router(
-    fastapi_users.get_verify_router(UserRead),
+    fastapi_users.get_verify_router(UserReadSchema),
     prefix="/auth",
     tags=["auth"],
 )
 
 router.include_router(
-    fastapi_users.get_users_router(UserRead, UserUpdate),
+    fastapi_users.get_users_router(UserReadSchema, UserUpdateSchema),
     prefix="/users",
     tags=["users"],
 )

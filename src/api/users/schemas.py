@@ -3,7 +3,7 @@ from fastapi_users import schemas
 from datetime import datetime
 
 
-class UserRead(schemas.BaseUser[int]):
+class UserReadSchema(schemas.BaseUser[int]):
     id: int
     email: EmailStr
     username: str
@@ -13,7 +13,7 @@ class UserRead(schemas.BaseUser[int]):
     is_verified: bool = False
 
 
-class UserCreate(schemas.BaseUserCreate):
+class UserCreateSchema(schemas.BaseUserCreate):
     email: EmailStr
     password: str
     username: str | None = None
@@ -22,7 +22,7 @@ class UserCreate(schemas.BaseUserCreate):
     is_verified: bool | None = False
 
 
-class UserUpdate(schemas.BaseUserUpdate):
+class UserUpdateSchema(schemas.BaseUserUpdate):
     password: str | None = None
     email: EmailStr | None = None
     username: str | None = None

@@ -1,10 +1,8 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
-from db import db_manager
+from db_manager import db_manager
 from models.base import Base
-
-# from models.user import User
 
 from api import api_router
 

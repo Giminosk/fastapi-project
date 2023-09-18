@@ -7,6 +7,7 @@ from models.base import Base
 from api import api_router
 
 
+# Comment if using alembic
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     async with db_manager.engine.begin() as conn:

@@ -3,7 +3,11 @@ from sqlalchemy import select
 from sqlalchemy.engine import Result
 from fastapi import HTTPException, status
 
-from .shemas import ProfileCreateSchema, ProfileUpdateSchema, ProfileUpdatePartialSchema
+from .schemas import (
+    ProfileCreateSchema,
+    ProfileUpdateSchema,
+    ProfileUpdatePartialSchema,
+)
 from src.models.profile import Profile
 from src.models.user import User
 
